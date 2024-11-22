@@ -18,11 +18,13 @@ class WARRIOR_API UWarriorHeroAnimInstance : public UWarriorCharacterAnimInstanc
 public:
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
-
-protected:
-	UPROPERTY()
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	AWarriorHeroCharacter* OwningHeroCharacter;
 
+protected:
+
+	
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category="AnimData|Property")
 	bool bShouldRelaxAnimation;
 

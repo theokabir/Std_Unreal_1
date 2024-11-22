@@ -2,7 +2,7 @@
 
 
 #include "AnimInstances/Hero/WarriorHeroAnimInstance.h"
-
+#include "DebugHelper.h"
 #include "Character/WarriorHeroCharacter.h"
 
 void UWarriorHeroAnimInstance::NativeInitializeAnimation()
@@ -10,7 +10,7 @@ void UWarriorHeroAnimInstance::NativeInitializeAnimation()
 	Super::NativeInitializeAnimation();
 	if (OwningCharacter)
 	{
-		OwningCharacter = CastChecked<AWarriorHeroCharacter>(OwningCharacter);
+		OwningHeroCharacter = CastChecked<AWarriorHeroCharacter>(OwningCharacter);
 	}
 }
 
