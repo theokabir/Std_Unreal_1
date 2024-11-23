@@ -30,4 +30,7 @@ public:
 private:
 	TWeakObjectPtr<AWarriorHeroCharacter> CachedCharacter;
 	TWeakObjectPtr<AWarriorHeroController> CachedController;
+
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Utility")
+	bool AttachToBone(const FName Bone, const FGameplayTag InWeaponTag);
 };

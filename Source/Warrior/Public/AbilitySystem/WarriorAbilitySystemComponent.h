@@ -6,6 +6,7 @@
 #include "AbilitySystemComponent.h"
 #include "WarriorAbilitySystemComponent.generated.h"
 
+struct FWarriorHeroAbilitySet;
 /**
  * 
  */
@@ -17,4 +18,10 @@ class WARRIOR_API UWarriorAbilitySystemComponent : public UAbilitySystemComponen
 public:
 	void OnAbilityInputPressed(const FGameplayTag& InInputTag);
 	void OnAbilityInputReleased(const FGameplayTag& InInputTag);
+
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Ability", meta=(ApplYLevel = -1))
+	void GrantHeroWeaponAbility(const TArray<FWarriorHeroAbilitySet>& InDefaultWeaponAbilities, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutHandles);
+
+	UFUNCTION(BlueprintCallable)
+	void RemovedGrantedHeroWeaponAbilities(UPARAM(ref) TArray<FGameplayAbilitySpecHandle>& InSpecHandlesToRemove);
 };

@@ -1,10 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
 
 #include "Character/WarriorHeroCharacter.h"
+#include "Components/Combat/HeroCombatComponent.h"
 #include "Controllers/WarriorHeroController.h"
+#include "Items/Weapons/WarriorWeaponBase.h"
 
 AWarriorHeroCharacter* UWarriorHeroGameplayAbility::GetHeroCharacterFromActorInfo()
 {
@@ -21,4 +20,18 @@ AWarriorHeroController* UWarriorHeroGameplayAbility::GetHeroControllerFromActorI
 UHeroCombatComponent* UWarriorHeroGameplayAbility::GetHeroCombatComponentFromActorInfo()
 {
 	return GetHeroCharacterFromActorInfo()->GetHeroCombatComponent();
+}
+
+bool UWarriorHeroGameplayAbility::AttachToBone(const FName Bone, const FGameplayTag InWeaponTag)
+{
+
+	const FAttachmentTransformRules Rules(
+	EAttachmentRule::SnapToTarget,
+	EAttachmentRule::KeepRelative,
+	EAttachmentRule::KeepWorld,
+	true);
+
+	USkeletalMeshComponent* Parent = GetActorInfo().SkeletalMeshComponent.Get();
+	
+	return GetHeroCombatComponentFromActorInfo()->GetCharacterCarriedWeaponByTag(InWeaponTag)->AttachToComponent(Parent, Rules, Bone);
 }
