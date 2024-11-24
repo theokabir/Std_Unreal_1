@@ -1,12 +1,8 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Character/WarriorBaseCharacter.h"
 
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "AbilitySystem/WarriorAttributeSet.h"
 
-// Sets default values
 AWarriorBaseCharacter::AWarriorBaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;
