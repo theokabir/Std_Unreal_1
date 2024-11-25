@@ -13,9 +13,6 @@
 		GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 		GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
-/**
- * 
- */
 UCLASS()
 class WARRIOR_API UWarriorAttributeSet : public UAttributeSet
 {
@@ -47,4 +44,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category="Defense")
 	FGameplayAttributeData DefensePower;
 	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet, DefensePower)
+
+	UPROPERTY(BlueprintReadWrite, Category="Damage")
+	FGameplayAttributeData DamageTaken;
+	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet, DamageTaken)
 };
