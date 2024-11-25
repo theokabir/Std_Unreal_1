@@ -17,6 +17,10 @@ public:
 	AWarriorEnemyCharacter();
 	FORCEINLINE UEnemyCombatComponent* GetCombatComponent() const { return EnemyCombatComponent; }
 
+	//~ Begin PawnCombatInterface
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	//~ End PawnCombatInterface
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UEnemyCombatComponent* EnemyCombatComponent;

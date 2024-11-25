@@ -28,4 +28,7 @@ namespace WarriorGameplayTags
 	
 	// Enemy Tags
 	UE_DEFINE_GAMEPLAY_TAG(ENEMY_WEAPON, "Enemy.Weapon");
+
+	// Shared Tags
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_MelleHit, "Shared.Event.MelleHit");
 }

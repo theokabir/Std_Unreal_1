@@ -1,11 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "DataAsset_StartupDatabase.generated.h"
 
+class UGameplayEffect;
 class UWarriorAbilitySystemComponent;
 class UWarriorGameplayAbility;
 /**
@@ -22,6 +21,10 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "StartupData")
 	TArray< TSubclassOf <UWarriorGameplayAbility> > ReactiveAbilities;
+	
+	
+	UPROPERTY(EditDefaultsOnly, Category = "StartupData|GameplayEffects")
+	TArray<TSubclassOf<UGameplayEffect>> StartupGameplayEffects;
 
 	virtual void GrantAbilities(const TArray< TSubclassOf <UWarriorGameplayAbility> >& InAbilitiesToGive, UWarriorAbilitySystemComponent* InWarriorASCToGive, int32 ApplyLevel = 1);
 

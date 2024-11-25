@@ -2,15 +2,12 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "WarriorTypes/WarriorEnumTypes.h"
 #include "WarriorFunctionLibrary.generated.h"
 
+struct FGameplayTag;
+class UPawnCombatComponent;
 class UWarriorAbilitySystemComponent;
-
-UENUM()
-enum class EWarriorConfirmType:uint8
-{
-	Yes, No	
-};
 
 UCLASS()
 class WARRIOR_API UWarriorFunctionLibrary : public UBlueprintFunctionLibrary
@@ -30,4 +27,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "WarriorFunctionLibrary", meta = (DisplayName = "Does Actor Have Tag", ExpandEnumAsExecs = "OutConfirmType"))
 	static void BP_DoesActorHaveTag(AActor* InActor, FGameplayTag InTag, EWarriorConfirmType& OutConfirmType);
+
+	static UPawnCombatComponent* NativeGetCombatComponentFromActor(AActor* InActor);
+
+	UFUNCTION(BlueprintCallable, Category = "WarriorFunctionLibrary", meta = (DisplayName = "Get CombatComponent by Actor", ExpandEnumAsExecs = "OutValidType"))
+	static UPawnCombatComponent* BP_GetCombatComponentByActor(AActor* InActor,EWarriorValidType& OutValidType);
 };

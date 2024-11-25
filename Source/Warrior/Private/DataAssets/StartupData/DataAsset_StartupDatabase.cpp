@@ -1,6 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "DataAssets/StartupData/DataAsset_StartupDatabase.h"
 
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
@@ -13,6 +10,20 @@ void UDataAsset_StartupDatabase::GiveToAbilitySystemComponent(UWarriorAbilitySys
 	
 	GrantAbilities(ActivateOnGivenAbilities, InWarriorASCToGive, ApplyLevel);
 	GrantAbilities(ReactiveAbilities, InWarriorASCToGive, ApplyLevel);
+
+	if (!StartupGameplayEffects.IsEmpty())
+	{
+		for (const TSubclassOf<UGameplayEffect>& Effect: StartupGameplayEffects)
+		{
+			if (!Effect) continue;
+			const UGameplayEffect* EffectCDO = Effect->GetDefaultObject<UGameplayEffect>();
+			InWarriorASCToGive->ApplyGameplayEffectToSelf(
+				EffectCDO,
+				ApplyLevel,
+				InWarriorASCToGive->MakeEffectContext()
+			);
+		}	
+	}
 }
 
 void UDataAsset_StartupDatabase::GrantAbilities(const TArray<TSubclassOf<UWarriorGameplayAbility>>& InAbilitiesToGive,

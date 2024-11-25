@@ -1,6 +1,7 @@
 #include "WarriorFunctionLibrary.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Interfaces/PawnCombatInterface.h"
 
 UWarriorAbilitySystemComponent* UWarriorFunctionLibrary::NativeGetWarriorASCFromActor(AActor* InActor)
 {
@@ -31,4 +32,21 @@ void UWarriorFunctionLibrary::BP_DoesActorHaveTag(AActor* InActor, FGameplayTag 
 	EWarriorConfirmType& OutConfirmType)
 {
 	OutConfirmType = NativeDoesActorHaveTag(InActor, InTag) ? EWarriorConfirmType::Yes : EWarriorConfirmType::No;
+}
+
+UPawnCombatComponent* UWarriorFunctionLibrary::NativeGetCombatComponentFromActor(AActor* InActor)
+{
+	checkf(InActor, TEXT("InActor variable not specified"));
+	if (const IPawnCombatInterface* CombatInterface = Cast<IPawnCombatInterface>(InActor))
+		return CombatInterface->GetPawnCombatComponent();
+
+	return nullptr;
+}
+
+UPawnCombatComponent* UWarriorFunctionLibrary::BP_GetCombatComponentByActor(AActor* InActor,
+	EWarriorValidType& OutValidType)
+{
+	UPawnCombatComponent* Component = NativeGetCombatComponentFromActor(InActor);
+	OutValidType = Component ? EWarriorValidType::Valid : EWarriorValidType::Invalid;
+	return Component;
 }
