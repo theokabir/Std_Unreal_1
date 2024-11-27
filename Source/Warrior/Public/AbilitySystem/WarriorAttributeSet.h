@@ -13,6 +13,8 @@
 		GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 		GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+class IPawnUIInterface;
+
 UCLASS()
 class WARRIOR_API UWarriorAttributeSet : public UAttributeSet
 {
@@ -50,4 +52,7 @@ public:
 	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet, DamageTaken)
 
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+
+private:
+	TWeakInterfacePtr<IPawnUIInterface> CachedPawnUIInterface;
 };
