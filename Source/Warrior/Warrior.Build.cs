@@ -19,7 +19,8 @@ public class Warrior : ModuleRules
 			"GameplayTasks", 
 			"EnhancedInput", 
 			"HeadMountedDisplay", 
-			"GameplayAbilities"
+			"GameplayAbilities", 
+			"AIModule"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
