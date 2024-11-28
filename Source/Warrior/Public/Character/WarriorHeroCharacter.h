@@ -13,9 +13,7 @@ class UDataAsset_InputConfig;
 class UCameraComponent;
 class USpringArmComponent;
 struct FInputActionValue;
-/**
- * 
- */
+
 UCLASS()
 class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 {

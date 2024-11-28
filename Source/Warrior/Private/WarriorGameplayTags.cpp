@@ -35,6 +35,9 @@ namespace WarriorGameplayTags
 	
 	UE_DEFINE_GAMEPLAY_TAG(ENEMY_Ability_Melee, "ENEMY.Ability.Melee");
 	UE_DEFINE_GAMEPLAY_TAG(ENEMY_Ability_Ranged, "ENEMY.Ability.Ranged");
+	
+	UE_DEFINE_GAMEPLAY_TAG(ENEMY_Status_Strafing, "ENEMY.Status.Strafing");
+	
 
 	// Shared Tags
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_HitReact, "Shared.Ability.HitReact");

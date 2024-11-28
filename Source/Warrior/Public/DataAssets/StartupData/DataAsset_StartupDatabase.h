@@ -7,9 +7,7 @@
 class UGameplayEffect;
 class UWarriorAbilitySystemComponent;
 class UWarriorGameplayAbility;
-/**
- * 
- */
+
 UCLASS()
 class WARRIOR_API UDataAsset_StartupDatabase : public UDataAsset
 {
