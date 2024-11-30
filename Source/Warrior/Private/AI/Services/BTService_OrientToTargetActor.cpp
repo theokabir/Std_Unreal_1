@@ -1,6 +1,9 @@
 #include "AI/Services/BTService_OrientToTargetActor.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "AIController.h"
+#include "WarriorFunctionLibrary.h"
+#include "WarriorGameplayTags.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 

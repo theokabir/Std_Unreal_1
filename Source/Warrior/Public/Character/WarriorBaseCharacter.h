@@ -9,6 +9,7 @@
 #include "Interfaces/PawnUIInterface.h"
 #include "WarriorBaseCharacter.generated.h"
 
+class UMotionWarpingComponent;
 class UDataAsset_StartupDatabase;
 class UWarriorAttributeSet;
 class UWarriorAbilitySystemComponent;
@@ -52,6 +53,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="CharacterData")
 	TSoftObjectPtr<UDataAsset_StartupDatabase> CharacterStartUpData;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, cATEGORY = "Motion Warping")
+	UMotionWarpingComponent* WarpingComponent;
 	
 public:
 	FORCEINLINE UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent() const { return WarriorAbilitySystemComponent; }

@@ -20,7 +20,8 @@ public class Warrior : ModuleRules
 			"EnhancedInput", 
 			"HeadMountedDisplay", 
 			"GameplayAbilities", 
-			"AIModule"
+			"AIModule",
+			"MotionWarping",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { "AnimGraphRuntime" });

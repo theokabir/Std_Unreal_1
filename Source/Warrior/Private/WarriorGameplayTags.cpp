@@ -38,6 +38,8 @@ namespace WarriorGameplayTags
 	
 	UE_DEFINE_GAMEPLAY_TAG(ENEMY_Status_Strafing, "ENEMY.Status.Strafing");
 	
+	UE_DEFINE_GAMEPLAY_TAG(ENEMY_Status_UnderAttack, "ENEMY.Status.UnderAttack");
+	
 
 	// Shared Tags
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_HitReact, "Shared.Ability.HitReact");
