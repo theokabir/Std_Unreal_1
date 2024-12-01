@@ -60,3 +60,8 @@ bool UWarriorFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* Targe
 	if (!(QueryTeamAgent && TargetTeamAgent)) return false;
 	return QueryTeamAgent->GetGenericTeamId() != TargetTeamAgent->GetGenericTeamId();
 }
+
+float UWarriorFunctionLibrary::GetScalableFloatValueAtLevel(const FScalableFloat& ScalableFloat, float InLevel)
+{
+	return ScalableFloat.GetValueAtLevel(InLevel);
+}
