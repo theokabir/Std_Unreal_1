@@ -5,6 +5,7 @@
 #include "WarriorTypes/WarriorEnumTypes.h"
 #include "WarriorFunctionLibrary.generated.h"
 
+struct FScalableFloat;
 struct FGameplayTag;
 class UPawnCombatComponent;
 class UWarriorAbilitySystemComponent;
@@ -35,4 +36,13 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "WarriorFunctionLibrary")
 	static bool IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn);
+
+	UFUNCTION(BlueprintPure, Category = "WarriorFunctionLibrary", meta = (CompactNodeTitle = "Get Value At Level"))
+	static float GetScalableFloatValueAtLevel(const FScalableFloat& ScalableFloat, float InLevel = 1.f);
+
+	UFUNCTION(BlueprintPure, Category = "WarriorFunctionLibrary")
+	static FGameplayTag ComputeHitReactDirectionTag(AActor* InAttacker, AActor* InTarget, float& OutAngleDifference);
+
+	UFUNCTION(BlueprintPure, Category = "WarriorFunctionLibrary")
+	static bool IsValidBlock(AActor* InAttacker, AActor* InDefender);
 };
