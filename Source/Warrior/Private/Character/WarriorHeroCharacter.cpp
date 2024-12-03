@@ -1,4 +1,5 @@
 #include "Character/WarriorHeroCharacter.h"
+#include "AbilitySystemBlueprintLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -11,6 +12,7 @@
 #include "DataAssets/Input/DataAsset_InputConfig.h"
 #include "DataAssets/StartupData/DataAsset_StartupDatabase.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "DebugHelper.h"
 
 AWarriorHeroCharacter::AWarriorHeroCharacter()
 {
@@ -86,6 +88,9 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	PlayerComponent->BindNativeInputAction(InputConfig, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Move);
 	PlayerComponent->BindNativeInputAction(InputConfig, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Look);
 
+	PlayerComponent->BindNativeInputAction(InputConfig, WarriorGameplayTags::InputTag_SwitchTarget, ETriggerEvent::Triggered, this, &ThisClass::SwitchTargetTriggered);
+	PlayerComponent->BindNativeInputAction(InputConfig, WarriorGameplayTags::InputTag_SwitchTarget, ETriggerEvent::Completed, this, &ThisClass::SwitchTargetCompleted);
+	
 	PlayerComponent->BindAbilityInputAction(InputConfig, this, &ThisClass::Input_AbilityInputPressed, &ThisClass::Input_AbilityInputReleased);
 }
 
@@ -112,6 +117,21 @@ void AWarriorHeroCharacter::Look(const FInputActionValue& Val)
 	const FVector2d LookVector = Val.Get<FVector2d>();
 	if (LookVector.X != 0.f) AddControllerYawInput(LookVector.X);
 	if (LookVector.Y != 0.f) AddControllerPitchInput(-LookVector.Y);
+}
+
+void AWarriorHeroCharacter::SwitchTargetTriggered(const FInputActionValue& Val)
+{
+	SwitchDirection = Val.Get<FVector2d>();
+}
+
+void AWarriorHeroCharacter::SwitchTargetCompleted(const FInputActionValue& Val)
+{
+	FGameplayEventData Data;
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
+		this,
+		(SwitchDirection.X >0.f)?WarriorGameplayTags::Player_Event_SwitchTarget_Right:WarriorGameplayTags::Player_Event_SwitchTarget_Left,
+		Data
+		);
 }
 
 void AWarriorHeroCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)

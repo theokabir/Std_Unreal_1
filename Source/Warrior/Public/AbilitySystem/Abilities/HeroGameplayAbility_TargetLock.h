@@ -6,6 +6,7 @@
 #include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
 #include "HeroGameplayAbility_TargetLock.generated.h"
 
+class UInputMappingContext;
 class UWarriorWidgetBase;
 /**
  * 
@@ -22,11 +23,23 @@ protected:
 	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
 	//~ End UGameplayAbility Interface
 
+	UFUNCTION(BlueprintCallable)
+	void OnTargetLockTick(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable)
+	void SwitchTarget(const FGameplayTag& InSwitchDirectionTag);
+
 private:
 	void TryLockOnTarget();
 	void GetAvailableActorsToLock();
 	AActor* GetNearestTargetFromAvailableTarget(const TArray<AActor*>& InAvailableActors);
+	void GetAvailableActorsAroundTheTarget(TArray<AActor*>& OutActorsOnLeft, TArray<AActor*>& OutActorsOnRight);
 	void DrawTargetLockWidget();
+	void SetTargetLockWidgetPosition();
+	void InitTargetLockMovement();
+	void ResetTargetLockMovement();
+	void InitMappingContext();
+	void RemoveMappingContext();
 	
 	void CancelTargetLockAbility();
 	void Cleanup();
@@ -41,7 +54,19 @@ private:
 	TArray<TEnumAsByte<EObjectTypeQuery>> BoxTraceChannel;
 	
 	UPROPERTY(EditDefaultsOnly, Category="TargetLock")
+	float TargetLockRotationInterpSpeed = 5.f;
+	
+	UPROPERTY(EditDefaultsOnly, Category="TargetLock")
+	float TargetLockMaxWalkSpeed = 150.f;
+	
+	UPROPERTY(EditDefaultsOnly, Category="TargetLock")
 	bool bShowDebug = false;
+
+	UPROPERTY(EditDefaultsOnly, Category="TargetLock")
+	float TargetLockCameraOffSet = 20.f;
+	
+	UPROPERTY(EditDefaultsOnly, Category="TargetLock")
+	UInputMappingContext* TargetLockMappingContext;
 
 	UPROPERTY()
 	TArray<AActor*> AvailableTargetToLock;
@@ -54,4 +79,10 @@ private:
 
 	UPROPERTY()
 	UWarriorWidgetBase* DrawnTargetWidget;
+	
+	UPROPERTY()
+	FVector2D TargetLockWidgetSize = FVector2D::ZeroVector;
+
+	UPROPERTY()
+	float CachedDefaultMaxWalkSpeed = 0.f;
 };
